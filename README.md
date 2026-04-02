@@ -1,5 +1,4 @@
-# TryHackMe-Active-Directory-Basics
-This is the active directory lab I completed on TryHackMe. 
+
 # TryHackMe — Active Directory Basics
 
 ![TryHackMe](https://img.shields.io/badge/TryHackMe-Active%20Directory%20Basics-red?style=for-the-badge&logo=tryhackme)
