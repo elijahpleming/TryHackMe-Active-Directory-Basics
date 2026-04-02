@@ -4,6 +4,8 @@
 ![TryHackMe](https://img.shields.io/badge/TryHackMe-Active%20Directory%20Basics-red?style=for-the-badge&logo=tryhackme)
 ![Status](https://img.shields.io/badge/Status-Completed-brightgreen?style=for-the-badge)
 
+![Completed](images/completed_active_direct_tryhack.png)
+
 ---
 
 ## Overview
@@ -45,7 +47,12 @@ The domain had an existing OU called **THM** with five child OUs: IT, Management
 ### Tasks Performed
 
 - Disabled Robert and Christine's accounts based on new business changes
+
+![Disabling Accounts in AD](images/disable_acconts.png)
+
 - Deleted a closed department's OU — had to enable **Advanced Features** under the View menu to turn off accidental deletion protection before removing it
+
+![Removing Accidental Deletion Protection](images/removed_accidental_deletion.png)
 
 ---
 
@@ -55,10 +62,16 @@ Active Directory allows you to delegate control of OUs to specific users without
 
 **What I did:** Delegated control of the Sales OU to Phillip so he could reset passwords for users in that OU only.
 
+![Delegating Control to Phillip](images/philip_can_change_password.png)
+
 After resetting Sophie's password as Phillip, I forced a password change at next logon:
 ```powershell
+Set-ADAccountPassword sophie -Reset -NewPassword (Read-Host -AsSecureString -Prompt 'New Password') -Verbose
+
 Set-ADUser -ChangePasswordAtLogon $true -Identity sophie -Verbose
 ```
+
+![Changing Sophie's Password via PowerShell](images/changing_sophie_password.png)
 
 ---
 
@@ -82,6 +95,8 @@ GPOs are a collection of settings applied to OUs, targeting either users or comp
 
 - **Password Policy** — Configured via: `Computer Configuration → Policies → Windows Settings → Security Settings → Account Policies → Password Policy`
 - **Auto Lock Screen** — Set inactivity limit to 5 minutes, linked to the root domain so it inherited down to all child OUs (Workstations, Servers, Domain Controllers)
+
+![Changing Password Length Policy via GPO](images/changing_password_length.png)
 
 GPOs are distributed via a network share called **SYSVOL**, stored on the DC at `C:\Windows\SYSVOL\sysvol\`. To force an immediate sync:
 ```powershell
@@ -127,6 +142,10 @@ When multiple trees with different namespaces are joined together, that is calle
 ### Trust Relationships
 Trusts allow users from one domain to be authorized to access resources in another.
 
+- **One-way trust** — Domain AAA trusts Domain BBB: users in BBB can access resources in AAA
+- **Two-way trust** — Both domains mutually authorize each other's users (default when joining a tree or forest)
+
+> Note: A trust relationship does not automatically grant access to all resources — it only opens the possibility. What is actually authorized is configured separately.
 - **One-way trust** — Domain AAA trusts Domain BBB: users in BBB can access resources in AAA
 - **Two-way trust** — Both domains mutually authorize each other's users (default when joining a tree or forest)
 
