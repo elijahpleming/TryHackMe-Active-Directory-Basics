@@ -4,7 +4,7 @@
 ![TryHackMe](https://img.shields.io/badge/TryHackMe-Active%20Directory%20Basics-red?style=for-the-badge&logo=tryhackme)
 ![Status](https://img.shields.io/badge/Status-Completed-brightgreen?style=for-the-badge)
 
-![Completed](images/completed_active_direct_tryhack.png)
+[![Completed](images/completed_active_direct_tryhack.png)](https://github.com/elijahpleming/TryHackMe-Active-Directory-Basics/blob/819168806ab01538914556bc859ae980e824d20f/completed%20active%20direct%20tryhack.png)
 
 ---
 
@@ -48,11 +48,11 @@ The domain had an existing OU called **THM** with five child OUs: IT, Management
 
 - Disabled Robert and Christine's accounts based on new business changes
 
-![Disabling Accounts in AD](images/disable_acconts.png)
+[![Disabling Accounts in AD](images/disable_acconts.png)](https://github.com/elijahpleming/TryHackMe-Active-Directory-Basics/blob/819168806ab01538914556bc859ae980e824d20f/disable%20acconts.png)
 
 - Deleted a closed department's OU — had to enable **Advanced Features** under the View menu to turn off accidental deletion protection before removing it
 
-![Removing Accidental Deletion Protection](images/removed_accidental_deletion.png)
+[![Removing Accidental Deletion Protection](images/removed_accidental_deletion.png)](https://github.com/elijahpleming/TryHackMe-Active-Directory-Basics/blob/819168806ab01538914556bc859ae980e824d20f/removed%20accidental%20deletion.png)
 
 ---
 
@@ -62,7 +62,7 @@ Active Directory allows you to delegate control of OUs to specific users without
 
 **What I did:** Delegated control of the Sales OU to Phillip so he could reset passwords for users in that OU only.
 
-![Delegating Control to Phillip](images/philip_can_change_password.png)
+[![Delegating Control to Phillip](images/philip_can_change_password.png)](https://github.com/elijahpleming/TryHackMe-Active-Directory-Basics/blob/819168806ab01538914556bc859ae980e824d20f/philip%20can%20change%20password.png)
 
 After resetting Sophie's password as Phillip, I forced a password change at next logon:
 ```powershell
@@ -71,7 +71,7 @@ Set-ADAccountPassword sophie -Reset -NewPassword (Read-Host -AsSecureString -Pro
 Set-ADUser -ChangePasswordAtLogon $true -Identity sophie -Verbose
 ```
 
-![Changing Sophie's Password via PowerShell](images/changing_sophie_password.png)
+[![Changing Sophie's Password via PowerShell](images/changing_sophie_password.png)](https://github.com/elijahpleming/TryHackMe-Active-Directory-Basics/blob/819168806ab01538914556bc859ae980e824d20f/changing%20sophie%20password.png)
 
 ---
 
@@ -96,7 +96,7 @@ GPOs are a collection of settings applied to OUs, targeting either users or comp
 - **Password Policy** — Configured via: `Computer Configuration → Policies → Windows Settings → Security Settings → Account Policies → Password Policy`
 - **Auto Lock Screen** — Set inactivity limit to 5 minutes, linked to the root domain so it inherited down to all child OUs (Workstations, Servers, Domain Controllers)
 
-![Changing Password Length Policy via GPO](images/changing_password_length.png)
+[![Changing Password Length Policy via GPO](images/changing_password_length.png)](https://github.com/elijahpleming/TryHackMe-Active-Directory-Basics/blob/819168806ab01538914556bc859ae980e824d20f/changing%20password%20length.png)
 
 GPOs are distributed via a network share called **SYSVOL**, stored on the DC at `C:\Windows\SYSVOL\sysvol\`. To force an immediate sync:
 ```powershell
