@@ -64,7 +64,7 @@ Active Directory allows you to delegate control of OUs to specific users without
 
 [![Delegating Control to Phillip](images/philip_can_change_password.png)](https://github.com/elijahpleming/TryHackMe-Active-Directory-Basics/blob/819168806ab01538914556bc859ae980e824d20f/philip%20can%20change%20password.png)
 
-After resetting Sophie's password as Phillip, I forced a password change at next logon:
+After resetting Sophie's password as Phillip, I forced a password change at next log on:
 ```powershell
 Set-ADAccountPassword sophie -Reset -NewPassword (Read-Host -AsSecureString -Prompt 'New Password') -Verbose
 
@@ -94,7 +94,7 @@ GPOs are a collection of settings applied to OUs, targeting either users or comp
 ### Tasks Performed
 
 - **Password Policy** — Configured via: `Computer Configuration → Policies → Windows Settings → Security Settings → Account Policies → Password Policy`
-- **Auto Lock Screen** — Set inactivity limit to 5 minutes, linked to the root domain so it inherited down to all child OUs (Workstations, Servers, Domain Controllers)
+- **Changed Password Length** — Changed password length to be a minimum of 10 characters, linked to the root domain
 
 [![Changing Password Length Policy via GPO](images/changing_password_length.png)](https://github.com/elijahpleming/TryHackMe-Active-Directory-Basics/blob/819168806ab01538914556bc859ae980e824d20f/changing%20password%20length.png)
 
